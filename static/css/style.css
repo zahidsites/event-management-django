@@ -1,0 +1,59 @@
+.form_body {
+    background-color: rgb(219, 219, 219);
+}
+.hero-pic {
+    background-image: url('/static/img/helth.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.in {
+    background-color: rgba(0, 0, 0, 0.526);
+}
+.ss {
+    top: 10px;
+    margin-right: 198px;
+}
+.form-custom {
+    width: 50%;
+    margin: 10px auto;
+}
+input,textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.formDesign {
+    border: 1px solid rgba(128, 128, 128, 0.353);
+    outline: none;
+    padding: 2px 5px;
+}
+.formDesign:focus {
+    border: 1px solid rgba(101, 146, 237, 0.694);
+}
+select {
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+.f-box input {
+    width: inherit;
+    height: inherit;
+}
+#participant {
+    width: 50%;
+    margin: 50px auto;
+}
+    
+.pop_btn label {
+    font-weight: 500;
+}
+.part-form {
+    border: 1px solid rgb(193, 193, 195);
+    outline: none;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+    margin-top: 6px;
+}
+
+

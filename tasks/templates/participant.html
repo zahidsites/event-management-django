@@ -1,0 +1,19 @@
+{% include "header.html" %}
+<h1 class="font-extrabold text-blue-400 text-3xl text-center mt-4">Participate</h1>
+    
+   <section id="participant">
+        <div class="">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'success' %}text-blue-500{% endif %}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">
+              {% csrf_token %}
+                {{participant}}
+                <button type="submit" class="bg-blue-500 py-1 px-4 text-white rounded-md font-semibold">Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
