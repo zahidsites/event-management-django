@@ -24,6 +24,8 @@ def details(request,id):
     detail = Event.objects.get(id = id)
     return render(request, 'details.html',{'detail' : detail})
 
+# --------------------DASHBOARD-------------------
+
 def dashboard(request):
     type = request.GET.get('type','all')
 
@@ -35,13 +37,12 @@ def dashboard(request):
     upcoming_event = Event.objects.filter(due_date__gt=date.today()).aggregate(upcoming = Count('id'))
 
     
-    if type == 'totalParticipant':
-        allEvents = Participant.objects.all()
-    elif type == 'totalEvent':
+    
+    if type == 'all':
         allEvents = base_query.all()
     elif type == 'comingEvent':
         allEvents = base_query.filter(due_date__gt = date.today())
-    elif type == 'all':
+    elif type == 'pastEvent':
         allEvents = base_query.filter(due_date__lt = date.today())
 
     context = {
@@ -53,21 +54,38 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html',context)
 
+# -----------------------ADD EVENT------------------------------
+
 def addEvent(request):
     event_form = EventForm()
-   
     if request.method == 'POST':
         event_form = EventForm(request.POST)
-      
-        if event_form.is_valid():
-           
+        if event_form.is_valid(): 
             event_form.save()
-            
 
     context = {
         'eventForm' : event_form,
     }
     return render(request, 'form.html', context)
+
+# ----------------UPDATE EVENTS -------------
+
+def updateEvent(request,id):
+    eventId = Event.objects.get(id=id)
+    event_form = EventForm(instance=eventId)
+    if request.method == 'POST':
+        event_form = EventForm(request.POST, instance=eventId)
+        if event_form.is_valid(): 
+            event_form.save()
+            messages.success(request,"Successful")
+            return redirect('updateEvent', id)
+            
+    context = {
+        'eventForm' : event_form,
+    }
+    return render(request, 'form.html', context)
+
+# -------------------PARTICIPANT EVENT ----------------------
 
 def participant(request,id):
     
@@ -77,9 +95,18 @@ def participant(request,id):
         if participant.is_valid():
             participant.save()
             messages.success(request,"Successful")
-            redirect('home')
+            return redirect('home')
     
     context = {
         'participant' : participant
     }
     return render(request, 'participant.html',context)
+
+# ------------- Delete operations -------------------
+
+def deleteEvent(request,id):
+    if request.method == 'POST':
+        del_ev = Event.objects.get(id=id)
+        del_ev.delete()
+        messages.success(request,'Delete Successful')
+        return redirect('dashboard')

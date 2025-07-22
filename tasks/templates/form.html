@@ -1,5 +1,10 @@
 {% include "header.html" %}
 <h1 class="font-extrabold text-blue-400 text-3xl text-center">Submit Your Event</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'success' %}text-blue-500{% endif %}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
     <div class="form-custom">
         <form action="" method="POST" class="form">
         {% csrf_token %}

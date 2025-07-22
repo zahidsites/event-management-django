@@ -4,7 +4,7 @@
      <div class="grid-area grid md:grid-cols-4 max-w-[1300px] mx-auto grid-cols-1 gap-6">
         
         <!-- Total Area Start-->
-         <a href="{% url 'dashboard' %}?type=totalParticipant">
+        
         <div class="bg-white-500  rounded-md shadow-sm p-4">
             
             <h2 class="text-gray-500 mb-2 text-xl font-semibold">Total number of participants.</h2>
@@ -22,9 +22,9 @@
                 </div>
             </div>
         </div>
-        </a>
+       
         <!-- Total Area Start-->
-         <a href="{% url 'dashboard' %}?type=totalEvent">
+         <a href="{% url 'dashboard' %}?type=all">
         <div class="bg-white-500 rounded-md shadow-sm p-4">
             <h2 class="text-gray-500 mb-2 text-xl font-semibold">Total number of events.</h2>
             <div class="flex justify-between items-start">
@@ -67,7 +67,7 @@
         </a>
         <!-- Toatal area end -->
         <!-- Total Area Start-->
-         <a href="{% url 'dashboard' %}?type=all">
+         <a href="{% url 'dashboard' %}?type=pastEvent">
         <div class="bg-white-500 rounded-md shadow-sm p-4">
             <h2 class="text-gray-500 mb-2 text-xl font-semibold">Number of past events.</h2>
             <div class="flex justify-between items-start">
@@ -95,16 +95,29 @@
         <div class="right-area">
             <div class="data-area container max-w-[1300px] mx-auto p-4 bg-white-500 shadow-md rounded-md
   mt-4">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'success' %}text-blue-500{% endif %}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
             <h1 class="text-xl py-2 text-bold">All Events</h1>
         <div class="row grid md:grid-cols-4 grid-cols-1 py-2">
           
         </div>
 {% for allEvent in allEvents %}
   
-        <div class="row grid md:grid-cols-4 grid-cols-1 py-2">
+        <div class="py-2">
             <div class="text-xl text-gray-500 flex items-center gap-2">
                 <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                <div class="text-sm">{{allEvent.name}}</div>
+                <div class=" flex items-center gap-2 text-sm text-sm">{{allEvent.name}} <a href="{% url 'updateEvent' allEvent.id %}">
+                    <button class="bg-green-700 px-3 text-white
+                    hover:bg-blue-700">Edit</button>
+                    </a>
+                    <form action="{% url 'delete-event' allEvent.id%}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
 
