@@ -83,17 +83,24 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 # }
 
 # # For postgreSql
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'event_management',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'event_management',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://event_management_db_5ems_user:ljAhUEPVdsaLUOcnkONnTok88KE8sEcC@dpg-d20ckpndiees739cf6q0-a.oregon-postgres.render.com/event_management_db_5ems',
+        conn_max_age=600
+    )
+}
 
 
 # DATABASES = {
