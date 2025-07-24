@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks'
+    'tasks',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -83,24 +84,24 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 # }
 
 # # For postgreSql
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'event_management',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
-
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://event_management_wqtt_user:NNH6cp90qFGRqvWN314KfTvM4r78fJ5O@dpg-d20g45buibrs7386c2kg-a.oregon-postgres.render.com/event_management_wqtt',
-#         conn_max_age=600
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'event_management',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://event_management_wqtt_user:NNH6cp90qFGRqvWN314KfTvM4r78fJ5O@dpg-d20g45buibrs7386c2kg-a.oregon-postgres.render.com/event_management_wqtt',
+        conn_max_age=600
+    )
+}
 
 
 # DATABASES = {
